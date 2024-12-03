@@ -3117,3 +3117,1383 @@ _Bash is the [Unix](https://www.google.com/search?q=What+is+UNIX+explain%3F&clie
 Credits: <a href="https://fossbytes.com"><b>fossbytes</b></a> & <a href="https://www.geeksforgeeks.org"><b>geeksforgeeks</b></a></p>
 
 [⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴛᴏᴩ](#table) 
+---
+
+---
+
+</p>
+ </details>
+ 
+<details><summary><b>Quick cheatsheet <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Memo.webp" alt="Memo" width="25" height="25" /></b></summary>
+<p>
+  
+>**Note** 💡<br>
+
+>    - A single hyphen `-` is used to represent a short option, such as `-a`.<br>
+>    - A double hyphen `--` is used to denote a long option, such as `--all`.<br>
+>    - Example command : `ls -a|--all` (List all directories). Can use either use the short or long options.
+     
+>    - Both short and long options were incorporated for educational purposes, allowing users to choose the preferred format.<br>
+>    - It's important to note that not all commands have both short and long options. Some commands may only have short options, while others may only have long options.
+
+### Contents
+- [Command Information](#command-information)
+- [Command History](#command-history)
+- [Navigating Directories](#navigating-directories)
+- [Creating Directories](#creating-directories)
+- [Moving Directories](#moving-directories)
+- [Deleting Directories](#deleting-directories)
+- [Creating Files](#creating-files)
+- [Standard Output, Error and Input](#standard-output-standard-error-and-standard-input)
+- [Moving Files](#moving-files)
+- [Deleting Files](#deleting-files)
+- [Reading Files](#reading-files)
+- [Sorting Files](#sorting-files)
+- [File Permissions](#file-permissions)
+- [Finding Files](#finding-files)
+- [Find in Files](#find-in-files)
+- [Replace in Files](#replace-in-files)
+- [File Editor](#file-editor)
+- [Symbolic Links](#symbolic-links)
+- [Compressing Files](#compressing-files)
+- [Decompressing Files](#decompressing-files)
+- [Packages](#packages)
+- [Disk Usage](#disk-usage)
+- [Memory Usage](#memory-usage)
+- [Shutdown and Reboot](#shutdown-and-reboot)
+- [Identifying Processes](#identifying-processes)
+- [Process Priority](#process-priority)
+- [Killing Processes](#killing-processes)
+- [Date & Time](#date--time)
+- [Scheduled Tasks](#scheduled-tasks)
+- [User Mangement](#user-management)
+- [HTTP Requests](#http-requests)
+- [Network Troubleshooting](#network-troubleshooting)
+- [DNS](#dns)
+- [Hardware](#hardware)
+- [System Information](#system-information)
+- [Terminal Multiplexers](#terminal-multiplexers)
+- [Secure Shell Protocol (SSH)](#secure-shell-protocol-ssh)
+- [Secure Copy](#secure-copy)
+- [Bash Profile](#bash-profile)
+- [Bash Script](#bash-script)
+#
+  
+## Command Information
+
+```bash
+man chmod                   # Display page manual of a command
+man -f|--whatis chmod       # Display short description about a command
+man -k|--apropos permission # Display all related commands from a specific keyword
+
+chmod --help                # Display usage options of a command
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Command History
+
+```bash
+history                                # View all previous commands
+history | grep foo                     # View the commands using a specific word
+history | grep -E|--extended-regexp -i|--ignore-case 'foo1|foo2|foo3' # View the commands using more than 1 specific word(case sensitive)
+history | head -n|--lines 3            # View the first 3 executed commands
+history 3                              # View the last 3 executed commands
+history -d 99                          # Clear a command from a specific line 
+history -c                             # Clears all history commands
+!!                                     # Run the last command executed
+
+touch foo.sh                           # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<┐
+chmod +x !$                            # !$ is the last argument of the last command i.e. foo.sh <<<<┘
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Navigating Directories
+
+```bash
+pwd                       # Print current directory path
+ls                        # List directories
+ls -a|--all               # List directories including hidden
+ls -l                     # List directories in long form
+ls -l -h|--human-readable # List directories in long form with human readable sizes
+ls -t                     # List directories by modification time, newest first
+stat foo.txt              # List size, created and modified timestamps for a file
+stat foo                  # List size, created and modified timestamps for a directory
+tree                      # List directory and file tree
+tree -a                   # List directory and file tree including hidden
+tree -d                   # List directory tree
+
+cd foo                    # Go to foo sub-directory
+cd                        # Go to home directory
+cd ~                      # Go to home directory
+cd -                      # Go to the previously chosen directory
+pushd foo                 # Go to foo sub-directory and add previous directory to stack
+popd                      # Go back to directory in stack saved by `pushd`
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Creating Directories 
+  
+```bash
+mkdir foo                        # Create a directory
+mkdir foo bar                    # Create multiple directories
+mkdir -p|--parents foo/bar       # Create nested directory
+mkdir -p|--parents {foo,bar}/baz # Create multiple nested directories
+
+mktemp -d|--directory            # Create a temporary directory
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Moving Directories
+
+```bash
+cp -R|--recursive foo bar                              # Copy directory
+mv foo bar                                             # Move directory
+
+rsync -z|--compress -v|--verbose /foo /bar             # Copy directory, overwrites destination
+rsync --ignore-existing -a|--archive -z|--compress -v|--verbose /foo /bar # Copy directory, without overwriting destination
+rsync -avz /foo username@hostname:/bar                 # Copy local directory to remote directory
+rsync -avz username@hostname:/foo /bar                 # Copy remote directory to local directory
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Deleting Directories
+
+```bash
+rmdir foo                        # Delete non-empty directory
+rm -r|--recursive foo            # Delete directory including contents
+rm -r|--recursive -f|--force foo # Delete directory including contents, ignore nonexistent files and never prompt
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Creating Files
+
+```bash
+touch foo.txt          # Create file or update existing files modified timestamp
+touch foo.txt bar.txt  # Create multiple files
+touch {foo,bar}.txt    # Create multiple files
+touch test{1..3}       # Create test1, test2 and test3 files
+touch test{a..c}       # Create testa, testb and testc files
+
+mktemp                 # Create a temporary file
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Standard Output, Standard Error and Standard Input
+
+```bash
+echo "foo" > bar.txt       # Overwrite file with content
+echo "foo" >> bar.txt      # Append to file with content
+
+ls exists 1> stdout.txt    # Redirect the standard output to a file
+ls noexist 2> stderror.txt # Redirect the standard error output to a file
+ls > out.txt 2>&1          # Redirect standard output and error to a file
+ls > /dev/null             # Discard standard output and error
+
+read foo                   # Read from standard input and write to the variable foo
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Moving Files
+
+```bash
+cp foo.txt bar.txt                                 # Copy file
+mv foo.txt bar.txt                                 # Move file
+
+rsync -z|--compress -v|--verbose /foo.txt /bar     # Copy file quickly if not changed
+rsync -z|--compress -v|--verbose /foo.txt /bar.txt # Copy and rename file quickly if not changed
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Deleting Files
+
+```bash
+rm foo.txt            # Delete file
+rm -f|--force foo.txt # Delete file, ignore nonexistent files and never prompt
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Reading Files
+
+```bash
+cat foo.txt              # Print all contents
+less foo.txt             # Print some contents at a time (g - go to top of file, SHIFT+g, go to bottom of file, /foo to search for 'foo')
+head foo.txt             # Print top 10 lines of file
+tail foo.txt             # Print bottom 10 lines of file
+tail -f|--follow foo.txt # Print bottom 10 lines of file updating with new data
+open foo.txt             # Open file in the default editor
+wc foo.txt               # List number of lines words and characters in the file
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Sorting Files
+
+```bash
+sort foo.txt                                  # Sort file (ascending order) 
+sort -r|--reverse foo.txt                     # Sort file (descending order) 
+sort -n|--numeric-sort foo.txt                # Sort numbers instead of strings 
+sort -t|--field-separator: -k 3n /foo/foo.txt # Sort by the third column of a file
+
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## File Permissions
+
+| # | Permission              | rwx | Binary |
+| - | -                       | -   | -      |
+| 7 | read, write and execute | rwx | 111    |
+| 6 | read and write          | rw- | 110    |
+| 5 | read and execute        | r-x | 101    |
+| 4 | read only               | r-- | 100    |
+| 3 | write and execute       | -wx | 011    |
+| 2 | write only              | -w- | 010    |
+| 1 | execute only            | --x | 001    |
+| 0 | none                    | --- | 000    |
+
+For a directory, execute means you can enter a directory.
+
+| User | Group | Others | Description                                                                                          |
+| -    | -     | -      | -                                                                                                    |
+| 6    | 4     | 4      | User can read and write, everyone else can read (Default file permissions)                           |
+| 7    | 5     | 5      | User can read, write and execute, everyone else can read and execute (Default directory permissions) |
+
+- u - User
+- g - Group
+- o - Others
+- a - All of the above
+
+```bash
+ls -l /foo.sh            # List file permissions
+chmod +100 foo.sh        # Add 1 to the user permission
+chmod -100 foo.sh        # Subtract 1 from the user permission
+chmod u+x foo.sh         # Give the user execute permission
+chmod g+x foo.sh         # Give the group execute permission
+chmod u-x,g-x foo.sh     # Take away the user and group execute permission
+chmod u+x,g+x,o+x foo.sh # Give everybody execute permission
+chmod a+x foo.sh         # Give everybody execute permission
+chmod +x foo.sh          # Give everybody execute permission
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Finding Files
+
+Find binary files for a command.
+
+```bash
+type -a wget                              # Display all locations of executable
+which -a wget                             # Display all locations of executables 
+whereis wget                              # Find the binary, source, and manual page files
+```
+
+`locate` uses an index and is fast.
+
+```bash
+updatedb                                   # Update the index
+
+locate foo.txt                             # Find a file
+locate --ignore-case                       # Find a file and ignore case
+locate f*.txt                              # Find a text file starting with 'f'
+```
+
+`find` doesn't use an index and is slow.
+
+```bash
+find /path -name foo.txt                   # Find a file
+find /path -iname foo.txt                  # Find a file with case insensitive search
+find /path -name "*.txt"                   # Find all text files
+find /path -name foo.txt -delete           # Find a file and delete it
+find /path -name "*.png" -exec pngquant {} # Find all .png files and execute pngquant on it
+find /path -type f -name foo.txt           # Find a file
+find /path -type d -name foo               # Find a directory
+find /path -type l -name foo.txt           # Find a symbolic link
+find /path -type f -mtime +30              # Find files that haven't been modified in 30 days
+find /path -type f -mtime +30 -delete      # Delete files that haven't been modified in 30 days
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Find in Files
+
+```bash
+grep 'foo' /bar.txt                         # Search for 'foo' in file 'bar.txt'
+grep 'foo' /bar -r|--recursive              # Search for 'foo' in directory 'bar'
+grep 'foo' /bar -R|--dereference-recursive  # Search for 'foo' in directory 'bar' and follow symbolic links
+grep 'foo' /bar -l|--files-with-matches     # Show only files that match
+grep 'foo' /bar -L|--files-without-match    # Show only files that don't match
+grep 'Foo' /bar -i|--ignore-case            # Case insensitive search
+grep 'foo' /bar -x|--line-regexp            # Match the entire line
+grep 'foo' /bar -C|--context 1              # Add N line of context above and below each search result
+grep 'foo' /bar -v|--invert-match           # Show only lines that don't match
+grep 'foo' /bar -c|--count                  # Count the number lines that match
+grep 'foo' /bar -n|--line-number            # Add line numbers
+grep 'foo' /bar --colour                    # Add colour to output
+grep 'foo\|bar' /baz -R                     # Search for 'foo' or 'bar' in directory 'baz'
+grep --extended-regexp|-E 'foo|bar' /baz -R # Use regular expressions
+grep -E 'foo|bar' /baz -R                   # Use regular expressions
+```
+
+### Replace in Files
+
+```bash
+sed 's/fox/bear/g' foo.txt                          # Replace fox with bear in foo.txt and output to console
+sed 's/fox/bear/gi' foo.txt                         # Replace fox (case insensitive) with bear in foo.txt and output to console
+sed 's/red fox/blue bear/g' foo.txt                 # Replace red with blue and fox with bear in foo.txt and output to console
+sed 's/fox/bear/g' foo.txt > bar.txt                # Replace fox with bear in foo.txt and save in bar.txt
+sed -i|--in-place 's/fox/bear/g' foo.txt            # Replace fox with bear and overwrite foo.txt
+sed -i|--in-place '/red fox/i\blue bear' foo.txt    # Insert blue bear before red fox and overwrite foo.txt
+sed -i|--in-place '/red fox/a\blue bear' foo.txt    # Insert blue bear after red fox and overwrite foo.txt
+sed -i|--in-place '10s/find/replace/' foo.txt       # Replace the 10th line of the file 
+sed -i|--in-place '10,20s/find/replace/' foo.txt    # Replace in the file 10-20 lines 
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+ 
+### File Editor
+ 
+ ```bash
+nano                              # Open a new file in nano
+nano foo.txt                      # Open a specific file
+nano -m|--mouse foo.txt           # Enable the use of the mouse
+nano -l|--linenumbers foo.txt     # Show line numbers in front of the text
+nano +line,10 foo.txt             # Open file positioning the cursor at the specified line and column
+nano -B|--backup foo.txt          # Create a backup file (`foo~`) when saving edits
+```
+ 
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Symbolic Links
+
+```bash
+ln -s|--symbolic foo bar            # Create a link 'bar' to the 'foo' folder
+ln -s|--symbolic -f|--force foo bar # Overwrite an existing symbolic link 'bar'
+ls -l                               # Show where symbolic links are pointing
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Compressing Files
+
+### zip
+
+Compresses one or more files into *.zip files.
+
+```bash
+zip foo.zip /bar.txt                # Compress bar.txt into foo.zip
+zip foo.zip /bar.txt /baz.txt       # Compress bar.txt and baz.txt into foo.zip
+zip foo.zip /{bar,baz}.txt          # Compress bar.txt and baz.txt into foo.zip
+zip -r|--recurse-paths foo.zip /bar # Compress directory bar into foo.zip
+```
+
+### gzip
+
+Compresses a single file into *.gz files.
+
+```bash
+gzip /bar.txt foo.gz           # Compress bar.txt into foo.gz and then delete bar.txt
+gzip -k|--keep /bar.txt foo.gz # Compress bar.txt into foo.gz
+```
+
+### tar -c
+
+Compresses (optionally) and combines one or more files into a single *.tar, *.tar.gz, *.tpz or *.tgz file.
+
+```bash
+tar -c|--create -z|--gzip -f|--file=foo.tgz /bar.txt /baz.txt # Compress bar.txt and baz.txt into foo.tgz
+tar -c|--create -z|--gzip -f|--file=foo.tgz /{bar,baz}.txt    # Compress bar.txt and baz.txt into foo.tgz
+tar -c|--create -z|--gzip -f|--file=foo.tgz /bar              # Compress directory bar into foo.tgz
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Decompressing Files
+
+### unzip
+
+```bash
+unzip foo.zip          # Unzip foo.zip into current directory
+```
+
+### gunzip
+
+```bash
+gunzip foo.gz           # Unzip foo.gz into current directory and delete foo.gz
+gunzip -k|--keep foo.gz # Unzip foo.gz into current directory
+```
+
+### tar -x
+
+```bash
+tar -x|--extract -z|--gzip -f|--file=foo.tar.gz # Un-compress foo.tar.gz into current directory
+tar -x|--extract -f|--file=foo.tar              # Un-combine foo.tar into current directory
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Packages
+
+```bash
+apt update                          # Refreshes repository index
+apt search wget                     # Search for a package
+apt show wget                       # List information about the wget package
+apt list --all-versions wget        # List all versions of the package
+apt install wget                    # Install the latest version of the wget package
+apt install wget=1.2.3              # Install a specific version of the wget package
+apt remove wget                     # Removes the wget package
+apt upgrade                         # Upgrades all upgradable packages
+apt clean                           # Clears out the local repository of downloaded package files
+
+dpkg -i|--install package_name.deb  # Install deb file
+dpkg -P package_name.deb            # Remove a deb file installion (including configuration files)
+rpm -i|--install package_name.rpm   # Install a rpm file installion
+rpm -e package_name.rpm             # Remove rpm file installion (including dependencies)
+```
+
+### Install package source code
+
+```bash
+tar zxvf sourcecode.tar.gz
+cd sourcecode
+./configure
+make
+make install
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Disk Usage
+
+```bash
+df                     # List disks, size, used and available space
+df -h|--human-readable # List disks, size, used and available space in a human readable format
+
+du                     # List current directory, subdirectories and file sizes
+du /foo/bar            # List specified directory, subdirectories and file sizes
+du -h|--human-readable # List current directory, subdirectories and file sizes in a human readable format
+du -d|--max-depth      # List current directory, subdirectories and file sizes within the max depth
+du -d 0                # List current directory size
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Memory Usage
+
+```bash
+free                   # Show memory usage
+free -h|--human        # Show human readable memory usage
+free -h|--human --si   # Show human readable memory usage in power of 1000 instead of 1024
+free -s|--seconds 5    # Show memory usage and update continuously every five seconds
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Shutdown and Reboot
+
+```bash
+shutdown                     # Shutdown in 1 minute
+shutdown now                 # Immediately shut down
+shutdown +5                  # Shutdown in 5 minutes
+
+shutdown -r|--reboot         # Reboot in 1 minute
+shutdown -r|--reboot now     # Immediately reboot
+shutdown -r|--reboot +5      # Reboot in 5 minutes
+shutdown -c                  # Cancel a shutdown or reboot
+
+reboot                       # Reboot now
+reboot -f                    # Force a reboot
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Identifying Processes
+
+```bash
+top                    # List all processes interactively
+htop                   # List all processes interactively
+ps ax                  # List all processes
+pidof foo              # Return the PID of all foo processes
+
+CTRL+Z                 # Suspend a process running in the foreground
+bg                     # Resume a suspended process and run in the background
+fg                     # Bring the last background process to the foreground
+fg 1                   # Bring the background process with the PID to the foreground
+
+sleep 30 &             # Sleep for 30 seconds and move the process into the background
+jobs                   # List all background jobs
+jobs -p                # List all background jobs with their PID
+
+lsof                   # List all open files and the process using them
+lsof -itcp:4000        # Return the process listening on port 4000
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Process Priority
+
+Process priorities go from -20 (highest) to 19 (lowest).
+
+```bash
+nice -n -20 foo        # Change process priority by name
+renice 20 PID          # Change process priority by PID
+ps -o ni PID           # Return the process priority of PID
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Killing Processes
+
+```bash
+CTRL+C                 # Kill a process running in the foreground
+kill PID               # Shut down process by PID gracefully. Sends TERM signal.
+kill -9 PID            # Force shut down of process by PID. Sends SIGKILL signal.
+pkill foo              # Shut down process by name gracefully. Sends TERM signal.
+pkill -9 foo           # force shut down process by name. Sends SIGKILL signal.
+killall foo            # Kill all process with the specified name gracefully.
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Date & Time
+
+```bash
+date                            # Print the date and time
+date --iso-8601                 # Print the ISO8601 date
+date --iso-8601=ns              # Print the ISO8601 date and time
+
+date -s "02 DEC 2020 12:02:02"  # Manually change date and time
+dpkg-reconfigure tzdata         # Change date/timezone
+
+uptime                          # Print how long the system has been running
+time tree                       # Print amount of time to tree takes to execute
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Scheduled Tasks
+
+```pre
+   *      *         *         *           *
+Minute, Hour, Day of month, Month, Day of the week
+```
+
+```bash
+crontab -l                 # List cron tab
+crontab -e                 # Edit cron tab in a file editor
+crontab /path/crontab      # Load cron tab from a file
+crontab -l > /path/crontab # Save cron tab to a file
+
+* * * * * foo              # Run foo every minute
+*/15 * * * * foo           # Run foo every 15 minutes
+0 * * * * foo              # Run foo every hour
+15 6 * * * foo             # Run foo daily at 6:15 AM
+44 4 * * 5 foo             # Run foo every Friday at 4:44 AM
+0 0 1 * * foo              # Run foo at midnight on the first of the month
+0 0 1 1 * foo              # Run foo at midnight on the first of the year
+
+at -l                      # List scheduled tasks
+at -c 1                    # Show task with ID 1
+at -r 1                    # Remove task with ID 1
+at now + 2 minutes         # Create a task in a file editor to execute in 2 minutes
+at 12:34 PM next month     # Create a task in a file editor to execute at 12:34 PM next month
+at tomorrow                # Create a task in a file editor to execute tomorrow
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## User Management
+
+```bash
+sudo su                                            # Switch to root user
+sudo foo                                           # Execute commands(has permission denied) as the root user
+sudo nano /foo/foo.txt                             # Open directories and files(is not writable) as the root user
+su username                                        # Switch to a different user
+
+passwd                                             # To change the password of a user
+adduser username                                   # To add a new user
+userdel username                                   # To remove user
+userdel -r|--remove username                       # To remove user with home directory and mail spool
+usermod -a|--append -G|--groups GROUPNAME USERNAME # To add a user to a group
+deluser USER GROUPNAME                             # To remove a user from a group
+
+last                                               # Display information of all the users logged in
+last username                                      # Display information of a particular user
+w                                                  # Display who is online
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## HTTP Requests
+
+```bash
+curl https://example.com                               # Return response body
+curl -i|--include https://example.com                  # Include status code and HTTP headers
+curl -L|--location https://example.com                 # Follow redirects
+curl -O|--remote-name foo.txt https://example.com      # Output to a text file
+curl -H|--header "User-Agent: Foo" https://example.com # Add a HTTP header
+curl -X|--request POST -H "Content-Type: application/json" -d|--data '{"foo":"bar"}' https://example.com # POST JSON
+curl -X POST -H --data-urlencode foo="bar" http://example.com  # POST URL Form Encoded
+
+wget https://example.com/file.txt                              # Download a file to the current directory
+wget -O|--output-document foo.txt https://example.com/file.txt # Output to a file with the specified name
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Network Troubleshooting
+
+```bash
+ifconfig                     # Display all network card and interface information 
+ifconfig -a                  # Display information of all network cards (including those that are not started at boot) 
+ifconfig eth0                # Display specific device information 
+ifconfig eth0 up             # Turn on the network card
+ifconfig eth0 down           # Turn off the network card
+ifconfig eth0 192.168.120.56 # Configure IP address for network card
+
+curl ifconfig.me             # Obtain external IP address
+
+ping example.com             # Send multiple ping requests using the ICMP protocol
+ping -c 10 -i 5 example.com  # Make 10 attempts, 5 seconds apart
+
+ip addr                      # List IP addresses on the system
+ip route show                # Show IP addresses to router
+ 
+netstat -i|--interfaces      # List all network interfaces and in/out usage
+netstat -l|--listening       # List all open ports
+
+traceroute example.com       # List all servers the network traffic goes through
+
+mtr -w|--report-wide example.com                                    # Continually list all servers the network traffic goes through
+mtr -r|--report -w|--report-wide -c|--report-cycles 100 example.com # Output a report that lists network traffic 100 times
+
+nmap 0.0.0.0                 # Scan for the 1000 most common open ports on localhost
+nmap 0.0.0.0 -p1-65535       # Scan for open ports on localhost between 1 and 65535
+nmap 192.168.4.3             # Scan for the 1000 most common open ports on a remote IP address
+nmap -sP 192.168.1.1/24      # Discover all machines on the network by ping'ing them
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## DNS
+
+```bash
+dig example.com                 # Show query information of domain A records
+dig -4 example.com              # Show IPv4 A records
+dig -6 example.com              # Show IPv6 AAA records
+dig example.com @nameserver     # Show query of a specific nameserver
+dig example.com -p 123          # Show query of a specific port number
+
+cat /etc/resolv.conf            # Nameservers file
+cat /etc/systemd/resolved.conf  # DNS resolver config file
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Hardware
+
+```bash
+lsusb                  # List USB devices
+lspci                  # List PCI hardware
+lshw                   # List all hardware
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## System Information
+
+```bash
+uname -s                  # Print kernel name
+uname -r                  # Print kernel release
+uname -m                  # Print Architecture
+uname -o                  # Print Operating System
+uname -a                  # Print all Systen info  
+
+lsb_release -a            # Print distribution-specific information
+dpkg --print-architecture # Print-architecture by name
+ 
+cat /proc/cpuinfo         # Show cpu info
+cat /proc/meminfo         # Show memory info
+
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Terminal Multiplexers
+
+Start multiple terminal sessions. Active sessions persist reboots. `tmux` is more modern than `screen`.
+
+```bash
+tmux             # Start a new session (CTRL-b + d to detach)
+tmux ls          # List all sessions
+tmux attach -t 0 # Reattach to a session
+
+screen           # Start a new session (CTRL-a + d to detach)
+screen -S foo    # Start a new named session
+screen -ls       # List all sessions
+screen -R 31166  # Reattach to a session
+
+exit             # Exit a session
+reset            # Reset the terminal(when binary and the terminal state is messed up)
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Secure Shell Protocol (SSH)
+
+```bash
+ssh hostname                 # Connect to hostname using your current user name over the default SSH port 22
+ssh -i foo.pem hostname      # Connect to hostname using the identity file
+ssh user@hostname            # Connect to hostname using the user over the default SSH port 22
+ssh user@hostname -p 8765    # Connect to hostname using the user over a custom port
+ssh ssh://user@hostname:8765 # Connect to hostname using the user over a custom port
+```
+
+Set default user and port in `~/.ssh/config`, so you can just enter the name next time:
+
+```bash
+$ cat ~/.ssh/config
+Host name
+  User foo
+  Hostname 127.0.0.1
+  Port 8765
+$ ssh name
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Secure Copy
+
+```bash
+scp foo.txt ubuntu@hostname:/home/ubuntu                    # Copy foo.txt into the specified remote directory
+scp ubuntu@hostname:/home/ubuntu/foo.txt /C:\Users\Admin    # Copy foo.txt from the specified remote directory
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Bash Profile
+
+- bash - `.bashrc`
+- zsh - `.zshrc`
+
+```bash
+# Always run ls after cd
+function cd {
+  builtin cd "$@" && ls
+}
+
+# Prompt user before overwriting any files
+alias cp='cp --interactive'
+alias mv='mv --interactive'
+alias rm='rm --interactive'
+
+# Always show disk usage in a human readable format
+alias df='df -h'
+alias du='du -h'
+```
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+## Bash Script
+
+### Variables
+
+```bash
+#!/bin/bash
+
+foo=123                # Initialize variable foo with 123
+declare -i foo=123     # Initialize an integer foo with 123
+declare -r foo=123     # Initialize readonly variable foo with 123
+echo $foo              # Print variable foo
+echo ${foo}_'bar'      # Print variable foo followed by _bar
+echo ${foo:-'default'} # Print variable foo if it exists otherwise print default
+
+export foo             # Make foo available to child processes
+unset foo              # Make foo unavailable to child processes and current session
+```
+
+### Environment Variables
+
+```bash
+#!/bin/bash
+
+set            # List all environment variables
+echo $PATH     # Print PATH environment variable
+export FOO=Bar # Set an environment variable
+```
+
+### Functions
+
+```bash
+#!/bin/bash
+
+greet() {
+  local world="World"
+  echo "$1 $world"
+  return "$1 $world"
+}
+greet "Hello"
+greeting=$(greet "Hello")
+```
+
+### Exit Codes
+
+```bash
+#!/bin/bash
+
+exit 0   # Exit the script successfully
+exit 1   # Exit the script unsuccessfully
+echo $?  # Print the last exit code
+```
+
+### Conditional Statements
+
+#### Boolean Operators
+
+- `$foo` - Is true
+- `!$foo` - Is false
+
+#### Numeric Operators
+
+- `-eq` - Equals
+- `-ne` - Not equals
+- `-gt` - Greater than
+- `-ge` - Greater than or equal to
+- `-lt` - Less than
+- `-le` - Less than or equal to
+- `-e` foo.txt - Check file exists
+- `-z` foo - Check if variable exists
+
+#### String Operators
+
+- `=` - Equals
+- `==` - Equals
+- `-z` - Is null
+- `-n` - Is not null
+- `<` - Is less than in ASCII alphabetical order
+- `>` - Is greater than in ASCII alphabetical order
+
+#### If Statements
+
+```bash
+#!/bin/bash
+
+[[
+if [[$foo = 'bar']]; then
+  echo 'one'
+elif [[$foo = 'bar']] || [[$foo = 'baz']]; then
+  echo 'two'
+elif [[$foo = 'ban']] && [[$USER = 'bat']]; then
+  echo 'three'
+else
+  echo 'four'
+fi
+]]
+```
+
+#### Inline If Statements
+
+```bash
+#!/bin/bash
+
+[[ $USER = 'rehan' ]] && echo 'yes' || echo 'no'
+```
+
+#### While Loops
+
+```bash
+#!/bin/bash
+
+[
+declare -i counter
+counter=10
+while [$counter -gt 2]; do
+  echo The counter is $counter
+  counter=counter-1
+done
+]
+```
+
+#### For Loops
+
+```bash
+#!/bin/bash
+
+for i in {0..10..2}
+  do
+    echo "Index: $i"
+  done
+
+for filename in file1 file2 file3
+  do
+    echo "Content: " >> $filename
+  done
+
+for filename in *;
+  do
+    echo "Content: " >> $filename
+  done
+```
+
+#### Case Statements
+
+```bash
+#!/bin/bash
+
+echo "What's the weather like tomorrow?"
+read weather
+
+case $weather in
+  sunny | warm ) echo "Nice weather: " $weather
+  ;;
+  cloudy | cool ) echo "Not bad weather: " $weather
+  ;;
+  rainy | cold ) echo "Terrible weather: " $weather
+  ;;
+  * ) echo "Don't understand"
+  ;;
+esac
+```
+ 
+<p align=right>
+Inspired by <a href="https://github.com/RehanSaeed/Bash-Cheat-Sheet">RehanSaeed/Bash-Cheat-Sheet</a></p>
+
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴄᴏɴᴛᴇɴᴛꜱ](#contents)
+
+---
+
+</p>
+ </details>
+ 
+<details><summary><b>Special characters <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Open%20Book.webp" alt="Open Book" width="25" height="25" /></b></summary>
+<p>
+
+## Linux Special Characters
+
+> **Note** 💡<br>
+> This symbol "└─>" represents an alternative meaning of some characters.
+
+<table class="tg">
+<tbody>
+<tr>
+<th class="tg-yw4l">Char.</th>
+<th class="tg-yw4l">Description</th>
+</tr>
+<tr>
+<td class="tg-yw4l">~</td>
+<td class="tg-yw4l">Home directory [tilde]. The path to a user's home directory location.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">-</td>
+<td class="tg-yw4l">Last directory [hyphen]. Go to the previously chosen directory.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">└─></td>
+<td class="tg-yw4l">Option flag for a command or filter.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">└─></td>
+<td class="tg-yw4l">Arithmetic operator. Minus of arithmetic operations.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">/</td>
+<td class="tg-yw4l">Root directory [forward slash]. The path to root directory location.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">└─></td>
+<td class="tg-yw4l">Filename path separator.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">\</td>
+<td class="tg-yw4l">Escape [backslash]. A quoting mechanism for single characters. It preserves the literal value of the next character that follows, with the exception of newline. </td>
+</tr>
+<tr>
+<td class="tg-yw4l">└─></td>
+<td class="tg-yw4l">Arithmetic operator. Divider of arithmetic operations.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">|</td>
+<td class="tg-yw4l">Pipe. This is a method of chaining commands together. Connects the <a href="https://www.google.com/search?q=What+is+an+output+command+in+linux+%3F&client=firefox-b-1-d&sca_esv=f2188c427bbface5&sca_upv=1&biw=1600&bih=733&sxsrf=AM9HkKk2mrH69ExcrN_rFQsqE_gEyomw-A%3A1703595497238&ei=6c2KZeyaDpr8wbkPrs6P0Aw&ved=0ahUKEwiss9Djk62DAxUafjABHS7nA8oQ4dUDCBA&uact=5&oq=What+is+an+output+command+in+linux+%3F&gs_lp=Egxnd3Mtd2l6LXNlcnAiJFdoYXQgaXMgYW4gb3V0cHV0IGNvbW1hbmQgaW4gbGludXggPzIEECMYJ0i3DlDfBVjfBXABeAGQAQCYAbEBoAGxAaoBAzAuMbgBA8gBAPgBAcICChAAGEcY1gQYsAPiAwQYACBBiAYBkAYI&sclient=gws-wiz-serp" target="_blank"><b>output (stdout)</b></a> of command1 to the <a href="https://www.google.com/search?q=what+is+an+input+command+in+linux+%3F&client=firefox-b-1-d&sca_esv=f2188c427bbface5&sca_upv=1&biw=1600&bih=733&sxsrf=AM9HkKlWpe5HFcG_bCtCc80V7cdGZ8AFuQ%3A1703595749415&ei=5c6KZZ6DGcuqwbkPmOa44AY&oq=What+is+an+input+command+in+%3F&gs_lp=Egxnd3Mtd2l6LXNlcnAiHVdoYXQgaXMgYW4gaW5wdXQgY29tbWFuZCBpbiA_KgIIADIEECMYJ0iTCVDfAljfAnACeAGQAQCYAaoBoAGqAaoBAzAuMbgBAcgBAPgBAcICChAAGEcY1gQYsAPiAwQYACBBiAYBkAYI&sclient=gws-wiz-serp" target="_blank"><b>input (stdin)</b></a> of command2. Each command reads the previous command’s output.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">|&</td>
+<td class="tg-yw4l">This operator connects the output (stdout) and error (stderr) of command1 to the input (stdin) of command2.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">||</td>
+<td class="tg-yw4l">The OR operator is used to chain commands. It will execute the first command then stop if successful, if not, it will proceed pass failed commands until one is successful and stop.</tr>
+<tr>
+<td class="tg-yw4l">&&</td>
+<td class="tg-yw4l">The AND operator is used to chain commands. It will execute commands only if the first command is successful and proceed until one fails.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">;</td>
+<td class="tg-yw4l">Command separator [semicolon]. Used to separate multiple commands and output all successful and failed ones.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">&</td>
+<td class="tg-yw4l">Run job in background [and]. A command followed by an & will run in the background.</td>
+</tr>
+<tr>
+<td class="tg-yw4l"> >, >>, <</td>
+<td class="tg-yw4l">Redirect a command's standard output (stdout) or input (stdin) into a file.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">&>, >&</td>
+<td class="tg-yw4l">Redirects a command's both standard output (stdout) and error (stderr) into a file.</td>
+</tr>
+<tr>
+<td class="tg-yw4l"><&-</td>
+<td class="tg-yw4l">Close standard input (stdin) to prevent showing from a file.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">>&-</td>
+<td class="tg-yw4l">Close standard output (stdout) to prevent showing from a file.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">>|</td>
+<td class="tg-yw4l">Force redirection (even if the <a href="https://www.google.com/search?q=what+is+noclobber+bash+meaning+%3F&client=firefox-b-d&sxsrf=ALiCzsYjxhOR8rNOMWPfYf5DFKIqA_f7SA%3A1667859549077&ei=XYRpY4uiBMLhxgGuwoP4Cw&ved=0ahUKEwjLxNT_jJ37AhXCsDEKHS7hAL8Q4dUDCA4&uact=5&oq=what+is+noclobber+bash+meaning+%3F&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIHCCMQsAMQJzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwA0oECE0YAUoECEEYAEoECEYYAFAAWABg0gFoAXABeACAAQCIAQCSAQCYAQDIAQnAAQE&sclient=gws-wiz-serp"><b>noclobber</b></a> option is set). This will forcibly overwrite an existing file.
+</tr>
+<tr>
+<td class="tg-yw4l">"</td>
+<td class="tg-yw4l">Partial quoting [double quotes]. Protects the text inside them from being split into multiple words or arguments, yet allow substitutions to occur, meaning most other special characters is usually prevented.</td>
+<tr>
+<td class="tg-yw4l">.</td>
+<td class="tg-yw4l">Source command [period]. To evaluate commands in the current execution context. This is a bash builtin.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">└─></td>
+<td class="tg-yw4l">"As a component of a filename. When working with filenames, a leading dot is the prefix of a "hidden" file, a file that an ls will not normally show. </td>
+</tr>
+<tr>
+<td class="tg-yw4l">└─></td>
+<td class="tg-yw4l">Character match. When matching characters, as part of a regular expression, a "dot" matches a single character.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">'</td>
+<td class="tg-yw4l">Full quoting [single quotes]. Protects the text inside them so that it has a literal meaning. This is a stronger form of quoting than double quotes.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">`</td>
+<td class="tg-yw4l">Command substitution [backquotes]. Assign the output of a shell command to a variable.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">#</td>
+<td class="tg-yw4l">Comment [number sign]. Lines in files beginning with a # (with the exception of #!) are comments and will not be executed.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">!</td>
+<td class="tg-yw4l">Reverse (or negate) [exclamation]. The ! operator inverts the exit status of the command to which it is applied. It also inverts the meaning of a test operator.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">*</td>
+<td class="tg-yw4l">Wild card [asterisk]. The * character serves as a "wild card" for filename expansion in <a href="https://www.google.com/search?q=What+is+globbing+in+shell%3F&client=firefox-b-d&sxsrf=ALiCzsYC9z8Ynyd5KFHYK7jo2SDHxrCuxg%3A1667844117587&ei=FUhpY77DI46ykvQPlPO_8A8&ved=0ahUKEwj-oa3B05z7AhUOmYQIHZT5D_4Q4dUDCA4&uact=5&oq=What+is+globbing+in+shell%3F&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIICAAQFhAeEA8yBQgAEIYDMgUIABCGAzIFCAAQhgMyBQgAEIYDOgQIABBHSgQITRgBSgQIQRgASgQIRhgAUPdAWPdAYJ9DaABwA3gAgAGdAYgBnQGSAQMwLjGYAQCgAQKgAQHIAQjAAQE&sclient=gws-wiz-serp"><b>globbing</b></a>. By itself, it matches every filename in a given directory.
+</td>
+<tr>
+<td class="tg-yw4l">└─></td>
+<td class="tg-yw4l">Arithmetic operator. Multiplier of arithmetic operations.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">?</td>
+<td class="tg-yw4l">Wild card [question mark]. The ? character serves as a single-character "wild card" for filename expansion in globbing, as well as representing one character in an extended regular expression.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">└─></td>
+<td class="tg-yw4l">Test operator. Within certain expressions, the ? indicates a test for a condition.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">{ }</td>
+<td class="tg-yw4l">Inline group [curly brackets]. Commands inside the curly braces are treated as if they were one command.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">└─></td>
+<td class="tg-yw4l">Placeholder for output text.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">( )</td>
+<td class="tg-yw4l"><a href="https://www.google.com/search?q=what+is+linux+Subshell+%3F&client=firefox-b-d&biw=1440&bih=660&sxsrf=ALiCzsanH7oWuGhBf-7bIH_SmJhmw9gGxg%3A1667750422612&ei=FtpnY5KDJdeCwbkP3eejiAc&ved=0ahUKEwiS5o289pn7AhVXQTABHd3zCHEQ4dUDCA4&uact=5&oq=what+is+linux+Subshell+%3F&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIECCMQJzoKCAAQRxDWBBCwA0oECE0YAUoECEEYAEoECEYYAFCyBliyBmC7B2gCcAF4AIABcYgBcZIBAzAuMZgBAKABAcgBCMABAQ&sclient=gws-wiz-serp"><b>Subshell</b></a> group [parentheses]. Commands within are executed in a subshell (a new process) Used much like a sandbox, if a command causes side effects (like changing variables), it will have no effect on the current shell.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">[ ]</td>
+<td class="tg-yw4l">Test expression [brackets]. It is part of the shell builtin test.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">└─></td>
+<td class="tg-yw4l">Array element. Brackets set off the numbering of each element.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">└─></td>
+<td class="tg-yw4l">Range of characters. As part of a regular expression, brackets delineate a range of characters to match.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">[[ ]]</td>
+<td class="tg-yw4l">Test/Evaluate [double brackets] a condition expression to determine whether true or false. It is more flexible than the single-bracket [ ] test.
+</td>
+<tr>
+<td class="tg-yw4l">(( ))</td>
+<td class="tg-yw4l">Arithmetic expression [double parentheses]. Characters such as +, -, *, and / are mathematical operators used for calculations.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">~+</td>
+<td class="tg-yw4l">Current working directory.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">~-</td>
+<td class="tg-yw4l">Previous working directory.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">:</td>
+<td class="tg-yw4l">Null command [colon]. This is the shell equivalent of a "NOP" (no op, a do-nothing operation). It may be considered a synonym for the shell builtin true.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">;;</td>
+<td class="tg-yw4l">Terminator [double semicolon]. Only used in case constructs to indicate the end of an alternative.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">" "</td>
+<td class="tg-yw4l">Whitespace. This is a tab, newline, vertical tab, form feed, carriage return, or space. Bash uses whitespace to determine where words begin and end.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">,, ,</td>
+<td class="tg-yw4l">Lowercase conversion in parameter substitution.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">^, ^^</td>
+<td class="tg-yw4l">Uppercase conversion in parameter substitution.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">$</td>
+<td class="tg-yw4l">Variable substitution. A $ prefixing a variable name indicates the value the variable holds</td>
+</tr>
+<tr>
+<td class="tg-yw4l">└─></td>
+<td class="tg-yw4l">End-of-line. In a regular expression, a "$" addresses the end of a line of text.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">$*</td>
+<td class="tg-yw4l">All the arguments are seen as a single word.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">!!</td>
+<td class="tg-yw4l">The previous command.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">!$</td>
+<td class="tg-yw4l">The last argument to the previous command.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">!*</td>
+<td class="tg-yw4l">All the arguments from the previous command.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">$?</td>
+<td class="tg-yw4l">The exit status of the last command executed.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">$#</td>
+<td class="tg-yw4l">The number of arguments supplied to a script.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">$$</td>
+<td class="tg-yw4l">The process number of the current shell. For shell scripts, this is the process ID under which they are executing.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">$!</td>
+<td class="tg-yw4l">The process number of the last background command.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">$_</td>
+<td class="tg-yw4l">Special variable set to final argument of previous command executed.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">$-</td>
+<td class="tg-yw4l">Expands to the current option flags as specified upon invocation, by the  set  builtin command, or those set by the shell itself (such as the -i option).
+</td>
+<tr>
+<td class="tg-yw4l">$0</td>
+<td class="tg-yw4l">Used to reference the name of the current shell or current shell script.</td>
+</tr>
+<tr>
+<td class="tg-yw4l">$n</td>
+<td class="tg-yw4l">These variables correspond to the arguments with which a script was invoked. Here n is a positive decimal number corresponding to the position of an argument (the first argument is $1, the second argument is $2, and so on).</td>
+</tr>
+</tbody>
+</table>
+
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴛᴏᴩ](#linux-special-characters)
+
+---
+
+</p>
+ </details>
+ 
+<details><b><summary>Keyboard controls <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Objects/Keyboard.webp" alt="Keyboard" width="25" height="25" /></b></summary>
+<p> 
+
+## Linux Keyboard Shortcuts
+
+| **Key** | **Function** |
+| :--: | :-- |
+| **Cursor Movement** |
+| Ctrl+B | Move cursor backward one character position |
+| Ctrl+F | Move cursor forward one character position |
+| Alt+F | Move cursor one word forward in line |
+| Alt+B | Move cursor one word backward in line |
+| Ctrl+A | Move cursor to beginning of text in line |
+| Ctrl+E | Move cursor to end of text in line |
+| **Text Editing** |
+| Ctrl+D | Erase character forward from cursor left to right |
+| Ctrl+H | Erase character backward from cursor right to left |
+| Alt+D | Erase the next word from cursor left to right |
+| Ctrl+W | Erase backwards to first non-alphanumeric character or empty space |
+| Ctrl+U | Erase a line of input from cursor right to left |
+| Ctrl+K | Erase a line of input from cursor left to right |
+| Alt+R | Revert any changes to a previously executed command that's being edited |
+| Alt+. | Fetch and paste the last word at end of a command from previous commands |
+| Ctrl+T | Reverse the position of the character the cursor is on with the previous character |
+| Alt+T | Reverse the position of the word the cursor is in with the previous word |
+| Alt+U | Capitalize every character from cursor left to right to the end of one word |
+| Alt+L | Uncapitalize every character from cursor left to right to the end of one word |
+| Ctrl+Y | Paste (yank) text cut by Ctrl+U, Ctrl+K, or Ctrl+W |
+| Ctrl+_ | Undo last change |
+| **Command History** |
+| Ctrl+P | Fetch previous command from history list |
+| Ctrl+N | Fetch next command from history list |
+| Ctrl+R | Reverse search commands from history list |
+| **Process Control** |
+| Ctrl+C | Break/Terminate a foreground job |
+| Ctrl+Z | Suspend a foreground job |
+| Ctrl+S | Suspend output to screen |
+| Ctrl+Q | Resume output to screen |
+| **Terminal Control** |
+| Ctrl+L | Clear screen contents (command-line needs to be empty) |
+| Ctrl+D | Log out from a shell (similar to exit) or send EOF |
+| Ctrl+O | Accept the current line for execution and fetch the next command |
+| Ctrl+X (twice) | Toggle cursor between current position and beginning of the line |
+| **Text Editing (Terminal)** |
+| Ctrl+Shift+C | Copy |
+| Ctrl+Shift+V | Paste |
+| Shift+Insert | Paste (alternative) |
+
+<i>Some of these shortcuts may vary depending on your terminal and system.</i>
+
+## Nano (text editor)
+
+| **Key**       | **Function** |
+| :--: | :-- |
+| **Movement**  | |
+| `Ctrl+Y`      | Scroll page **up** |
+| `Ctrl+V`      | Scroll page **down** |
+| `Alt+\`       | Go to the beginning of the file |
+| `Alt+/`       | Go to the end of the file |
+| **Editing**   | |
+| `Ctrl+H`      | Delete the character before the cursor |
+| `Ctrl+D`      | Delete the character under the cursor |
+| `Alt+Backspace`| Delete the word to the left |
+| `Ctrl+Del`    | Delete the word to the right |
+| `Alt+Del`     | Delete the current line |
+| `Alt+^`       | Copy selected text to the cut buffer |
+| `Ctrl+K`      | Cut selected text to the cut buffer |
+| `Ctrl+U`      | Paste text from the cut buffer (clipboard) |
+| `Alt+A`       | Start text selection (can be used with Ctrl+K to cut specific text) |
+| `Ctrl+J`      | Justify (wrap) the current paragraph |
+| **Undo and Redo** | |
+| `Alt+U`       | Undo the last action |
+| `Alt+E`       | Redo the last undone action |
+| **Search and Replace** | |
+| `Ctrl+Q`      | Start backward search (press again to repeat) |
+| `Ctrl+W`      | Start forward search (press Alt+W to search for the same term again) |
+| `Ctrl+\`      | Replace a string or regular expression |
+| **File Operations** | |
+| `Ctrl+R`      | Insert a file at the current cursor position |
+| `Ctrl+O`      | Write changes to the file ("Save as") |
+| `Ctrl+S`      | Save the current file |
+| `Ctrl+X`      | Exit Nano (prompts to save changes if needed) |
+| **Miscellaneous** | |
+| `Alt+3`       | Comment/uncomment the line/region |
+| `Ctrl+G`      | Show help for all available commands |
+| `Ctrl+T`      | Open the spell checker |
+
+## Vim (text editor)
+
+| **Key** | **Function** |
+| :--: | :-- |
+| **Movement** | |
+| `h` | Move left |
+| `j` | Move down |
+| `k` | Move up |
+| `l` | Move right |
+| `w` | Move forward to the beginning of the next word |
+| `b` | Move backward to the beginning of the previous word |
+| `e` | Move to the end of the current word |
+| `0` (zero) | Move to the beginning of the line |
+| `$` | Move to the end of the line |
+| `gg` | Go to the first line of the document |
+| `G` | Go to the last line of the document |
+| `:{number}` | Go to a specific line number |
+| `Ctrl+f` | Page down |
+| `Ctrl+b` | Page up |
+| `%` | Move to matching parenthesis or bracket |
+| `^` | Move to the first non-blank character of the line |
+| `H` | Move to the top of the screen |
+| `M` | Move to the middle of the screen |
+| `L` | Move to the bottom of the screen |
+| `*` | Search forward for the word under the cursor |
+| `#` | Search backward for the word under the cursor |
+| **Editing** | |
+| `i` | Insert before the cursor |
+| `I` | Insert at the beginning of the line |
+| `a` | Append after the cursor |
+| `A` | Append at the end of the line |
+| `o` | Open a new line below the current line |
+| `O` | Open a new line above the current line |
+| `r` | Replace a single character |
+| `R` | Enter replace mode |
+| `x` | Delete the character under the cursor |
+| `X` | Delete the character before the cursor |
+| `dd` | Delete the current line |
+| `D` | Delete from the cursor to the end of the line |
+| `yy` | Yank (copy) the current line |
+| `p` | Paste after the cursor |
+| `P` | Paste before the cursor |
+| `u` | Undo the last action |
+| `Ctrl+r` | Redo the last undone action |
+| **Visual Mode** | |
+| `v` | Enter visual mode (character selection) |
+| `V` | Enter visual line mode |
+| `Ctrl+v` | Enter visual block mode |
+| **Text Objects** | |
+| `ciw` | Change the inner word |
+| `diw` | Delete the inner word |
+| `yaw` | Yank (copy) the entire word |
+| `ci"` | Change text inside double quotes |
+| `di(` | Delete text inside parentheses |
+| **Search and Replace** | |
+| `/pattern` | Search forward for 'pattern' |
+| `?pattern` | Search backward for 'pattern' |
+| `n` | Repeat the search in the same direction |
+| `N` | Repeat the search in the opposite direction |
+| `:%s/old/new/g` | Replace all occurrences of 'old' with 'new' in the file |
+| `:%s/old/new/gc` | Replace all occurrences of 'old' with 'new' with confirmation |
+| **File Operations** | |
+| `:w` | Write (save) the file |
+| `:w filename` | Write to a specific filename |
+| `:q` | Quit Vim |
+| `:q!` | Quit without saving changes |
+| `:wq` | Write and quit |
+| `:x` | Write and quit (same as `wq`) |
+| **Multiple Files** | |
+| `:e filename` | Edit a file in a new buffer |
+| `:bnext` or `:bn` | Go to the next buffer |
+| `:bprev` or `:bp` | Go to the previous buffer |
+| `:bd` | Delete a buffer (close the file) |
+| `:sp filename` | Open a file in a new buffer and split the window horizontally |
+| `:vsp filename` | Open a file in a new buffer and split the window vertically |
+| `Ctrl+ws` | Split the window horizontally |
+| `Ctrl+wv` | Split the window vertically |
+| `Ctrl+ww` | Switch between windows |
+| `Ctrl+wq` | Quit the current window |
+| **Macros** | |
+| `qa` | Record macro in register 'a' |
+| `q` | Stop recording macro |
+| `@a` | Run macro from register 'a' |
+| `@@` | Rerun the last executed macro |
+| **Marking and Jumping** | |
+| `m{a-z}` | Set a mark with a letter (a-z) in the current position |
+| `'a` | Jump to the line with mark 'a' |
+| `` `a `` | Jump to the exact position with mark 'a' |
+| `:marks` | List all the marks |
+| `Ctrl+o` | Jump to the previous location |
+| `Ctrl+i` | Jump to the next location |
+| **Tabs** | |
+| `:tabnew` | Open a new tab |
+| `gt` or `:tabnext` | Go to the next tab |
+| `gT` or `:tabprev` | Go to the previous tab |
+| `:tabclose` | Close the current tab |
+| `:tabs` | List all open tabs |
+| **Miscellaneous** | |
+| `.` | Repeat the last command |
+| `ZZ` | Write the current file (if modified) and quit |
+| `ZQ` | Quit without checking for changes |
+| `Ctrl+g` | Show the file name and status |
+| `g Ctrl+g` | Show the cursor position (line, column, and character) |
+
+[⬆ ʀᴇᴛᴜʀɴ ᴛᴏ ᴛᴏᴩ](#linux-keyboard-shortcuts)
+
+</p>
+ </details>
+ ---
+ 
+
